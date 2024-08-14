@@ -1,0 +1,10 @@
+<testData>
+  <createUser>
+    <createUserName>Shravan</createUserName>
+    <createUserJob>QA Engineer</createUserJob>
+  </createUser>
+  <updateUser>
+    <updateUserName>Shravan Kumar</updateUserName>
+    <updateUserJob>Senior QA Engineer</updateUserJob>
+  </updateUser>
+</testData>
