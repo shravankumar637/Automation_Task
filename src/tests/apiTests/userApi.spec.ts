@@ -9,6 +9,11 @@ test.describe('User API Tests', () => {
   let userAPI: UserAPI;
   let userId: number;
 
+
+  test.beforeAll(() => {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Disable SSL verification
+  });
+
   /**
    * Initializes the `UserAPI` class before each test, using Playwright's `request` object to set up the API context.
    * The context is configured to ignore HTTPS errors.
