@@ -30,7 +30,7 @@ jobs:
       if: always()
       id: allure-report
       with:
-        allure_results: allure-report
+        allure_results: allure-results
         allure_history: allure-history
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
