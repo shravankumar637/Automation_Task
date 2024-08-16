@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, request } from '@playwright/test';
 import { UserAPI } from '../../api/UserAPI';
 
 /**
@@ -11,9 +11,13 @@ test.describe('User API Tests', () => {
 
   /**
    * Initializes the `UserAPI` class before each test, using Playwright's `request` object to set up the API context.
+   * The context is configured to ignore HTTPS errors.
    */
-  test.beforeEach(({ request }) => {
-    userAPI = new UserAPI(request);
+  test.beforeEach(async ({ playwright }) => {
+    const requestContext = await playwright.request.newContext({
+      ignoreHTTPSErrors: true,
+    });
+    userAPI = new UserAPI(requestContext);
   });
 
   /**
