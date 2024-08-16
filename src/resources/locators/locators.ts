@@ -77,7 +77,7 @@ export class Locators {
 
     this.polestar3Image = this.page.getByRole('img', { name: 'A white Polestar 3 SUV is' });
     this.polestar2Image = this.page.getByRole('img', { name: 'Side birds eye view of Polestar 2' });
-    this.polestar4Image = this.page.getByRole('img', { name: 'A white Polestar 4 surrounded by red flowers' });
+    this.polestar4Image = this.page.getByRole('img', { name: 'A white Polestar 4 driving on a narrow road though the desert' });
     
     this.discoverLinkForPolestar3 = this.page.locator("(//*[normalize-space()='Upptäck'])[1]");
     this.bookTestDriveLink = this.page.getByRole('link', { name: 'Book a Test Drive' });
@@ -111,7 +111,7 @@ export class Locators {
 
     this.polestar3Button = this.page.locator('#dlHQDWeWQZaIAaoLMmhnZw');
     this.polestar2Button = this.page.locator('#YEbvymNVSXC97BE0p-lvqg');
-    this.polestar4Button = this.page.locator('[id="\\31 62569177"]');
+    this.polestar4Button = this.page.locator("//a[@id='ZRkzLL-IRtq-VRTwsC9viw']");
     this.specialIdButton = this.page.locator('[id="\\31 40804533"]');
   }
 }
