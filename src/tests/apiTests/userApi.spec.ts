@@ -1,6 +1,11 @@
-import { test, expect, request } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { UserAPI } from '../../api/UserAPI';
+import { utility } from '../../utils/utility';
 
+
+// Load test data and headers before the test suite runs
+let testData: any;
+const headers = utility.getHeaders();
 /**
  * This test suite contains tests for interacting with the User API using the `UserAPI` class.
  * It covers CRUD operations including getting all users, creating a new user, updating an existing user, and deleting a user.
@@ -8,10 +13,12 @@ import { UserAPI } from '../../api/UserAPI';
 test.describe('User API Tests', () => {
   let userAPI: UserAPI;
   let userId: number;
+  let testData: any;
 
-
-  test.beforeAll(() => {
+  test.beforeAll(async () => {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Disable SSL verification
+    testData = await utility.getTestData('backendData.xml');
+  
   });
 
   /**
@@ -46,16 +53,13 @@ test.describe('User API Tests', () => {
    */
   test('POST Create New User', async () => {
     const newUser = {
-      name: "Shravan",
-      job: "QA Engineer",
-    };
-    
-    const headers = {
-      "Accept": "application/json",
+      name: testData.testData.createUser[0].createUserName[0],
+      job: testData.testData.createUser[0].createUserJob[0],
     };
   
     const response = await userAPI.createUser(newUser, headers);
     const responseBody = await response.json();
+    console.log('Created User Response:', responseBody);
     userId = responseBody.id;
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(201);
@@ -71,16 +75,13 @@ test.describe('User API Tests', () => {
    */
   test('PUT Update User', async () => {
     const updatedUser = {
-      name: "Shravan Kumar",
-      job: "Senior QA Engineer",
-    };
-
-    const headers = {
-      "Accept": "application/json",
+      name: testData.testData.updateUser[0].updateUserName[0],
+      job: testData.testData.updateUser[0].updateUserJob[0],
     };
 
     const response = await userAPI.updateUser(userId, updatedUser, headers);
     const responseBody = await response.json();
+    console.log('Updated Users Response:', responseBody);
     expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
     expect(responseBody.name).toBe(updatedUser.name);

@@ -13,7 +13,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './src/tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -22,7 +22,7 @@ export default defineConfig({
   workers: process.env.CI ? 3 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html'],
+    ['html', { outputFolder: 'src/reports/screenshots' }],
     ['allure-playwright', { resultsDir: 'allure-results' }]
   ],
   
@@ -35,6 +35,7 @@ export default defineConfig({
     trace: 'on',
     screenshot: 'only-on-failure',
     ignoreHTTPSErrors: true,
+
   },
 
   /* Configure projects for major browsers */
